@@ -5,7 +5,6 @@ import App from './App.jsx'
 import { createBrowserRouter , RouterProvider } from 'react-router-dom'
 import AddEmployee from './components/AddEmployee.jsx'
 import Employees from './components/Employees.jsx'
-import EmployeeDetails from './components/EmployeeDetails.jsx'
 import Dashboard from './components/Dashboard.jsx'
 
 const router = createBrowserRouter([
@@ -25,10 +24,6 @@ const router = createBrowserRouter([
         path:'/employees',
         element:<Employees/>
       },
-      {
-        path:'/details',
-        element:<EmployeeDetails/>
-      }
     ]
   }
 ])

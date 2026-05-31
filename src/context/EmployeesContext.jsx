@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const EmployeesContext = createContext();
 
@@ -44,8 +45,8 @@ export function EmployeesProvider({ children }) {
       id: 2,
       employeeName: "Komal",
       email: "komal@gmail.com",
-      position: "HR Manager",
-      department: "HR",
+      position: "Marketing Manager",
+      department: "Marketing",
       salary: 40000,
       date: "2026-05-30",
     },
@@ -60,6 +61,7 @@ export function EmployeesProvider({ children }) {
   const [error, setError] = useState("");
   const [editTimeError, setEditTimeError] = useState("");
   const [edit, setEdit] = useState(false);
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -73,7 +75,7 @@ export function EmployeesProvider({ children }) {
       !date
     ) {
       return setError("All Fields are required");
-    } else if (employeeList.map((allEmp) => allEmp.email === email)) {
+    } else if (employeeList.some((allEmp) => allEmp.email === email)) {
       return setError("email already registered");
     }
 
@@ -89,7 +91,14 @@ export function EmployeesProvider({ children }) {
 
     setEmployeeList([...employeeList, newEmployee]);
     console.log(employeeList);
+    setEmployeeName("");
+    setEmail("");
+    setPosition("");
+    setDepartment("");
+    setSalary("");
+    setDate("");
     alert("Employee Added");
+    navigate("/employees");
   }
 
   function findEdit(e) {
@@ -139,6 +148,13 @@ export function EmployeesProvider({ children }) {
           : pre,
       ),
     );
+
+    setEmployeeName("");
+    setEmail("");
+    setPosition("");
+    setDepartment("");
+    setSalary("");
+    setDate("");
     setEdit(!edit);
   }
 

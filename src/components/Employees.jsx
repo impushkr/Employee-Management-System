@@ -24,7 +24,7 @@ function Employees() {
     handleSubmit,
     findEdit,
     handleEdit,
-    delEmployee
+    delEmployee,
   } = useEmployees();
 
   return (
@@ -64,11 +64,21 @@ function Employees() {
                   <td className="p-4">
                     <div className="flex items-center gap-4">
                       <button className="cursor-pointer">
-                        <FiEdit size={18} onClick={()=>{findEdit(employee)}}/>
+                        <FiEdit
+                          size={18}
+                          onClick={() => {
+                            findEdit(employee);
+                          }}
+                        />
                       </button>
 
                       <button className="cursor-pointer">
-                        <FiTrash2 size={18} onClick={()=>{delEmployee(employee)}}/>
+                        <FiTrash2
+                          size={18}
+                          onClick={() => {
+                            delEmployee(employee);
+                          }}
+                        />
                       </button>
                     </div>
                   </td>
@@ -137,7 +147,9 @@ function Employees() {
                 onChange={(e) => setDate(e.target.value)}
               />
 
-              {editTimeError && <p className="text-red-500 text-sm">{editTimeError}</p>}
+              {editTimeError && (
+                <p className="text-red-500 text-sm">{editTimeError}</p>
+              )}
 
               <div className="flex gap-3">
                 <button
@@ -147,7 +159,19 @@ function Employees() {
                   Save Changes
                 </button>
 
-                <button type="button" className="flex-1 border rounded-lg py-3" onClick={()=>{setEdit(!edit)}}>
+                <button
+                  type="button"
+                  className="flex-1 border rounded-lg py-3"
+                  onClick={() => {
+                    setEmployeeName("");
+                    setEmail("");
+                    setPosition("");
+                    setDepartment("");
+                    setSalary("");
+                    setDate("");
+                    setEdit(!edit);
+                  }}
+                >
                   Cancel
                 </button>
               </div>
