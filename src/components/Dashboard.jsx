@@ -1,53 +1,16 @@
 import React from "react";
+import { useEmployees } from "../context/EmployeesContext";
 
 function Dashboard() {
-  const employees = [
-    {
-      id: 1,
-      name: "Nick",
-      position: "Frontend Developer",
-      department: "IT",
-      salary: 50000,
-    },
-    {
-      id: 2,
-      name: "Rahul",
-      position: "Backend Developer",
-      department: "IT",
-      salary: 60000,
-    },
-    {
-      id: 3,
-      name: "Aman",
-      position: "HR Manager",
-      department: "HR",
-      salary: 45000,
-    },
-    {
-      id: 4,
-      name: "Priya",
-      position: "UI/UX Designer",
-      department: "Design",
-      salary: 55000,
-    },
-    {
-      id: 5,
-      name: "Simran",
-      position: "Marketing Executive",
-      department: "Marketing",
-      salary: 40000,
-    },
-  ];
+  const {employeeList}=useEmployees();
 
-  const totalEmployees = employees.length;
-
-  const totalSalary = employees.reduce(
+  const totalSalary = employeeList.reduce(
     (sum, employee) => sum + employee.salary,
     0
   );
 
   const averageSalary = Math.round(
-    totalSalary / totalEmployees
+    totalSalary / employeeList.length
   );
 
   return (
@@ -63,7 +26,7 @@ function Dashboard() {
             Total Employees
           </h2>
           <p className="text-3xl font-bold">
-            {totalEmployees}
+            {employeeList.length}
           </p>
         </div>
 
@@ -93,14 +56,14 @@ function Dashboard() {
         </h2>
 
         <div className="space-y-3">
-          {employees.map((employee) => (
+          {employeeList.map((employee) => (
             <div
               key={employee.id}
               className="flex justify-between border-b pb-2"
             >
               <div>
                 <p className="font-medium">
-                  {employee.name}
+                  {employee.employeeName}
                 </p>
                 <p className="text-sm text-gray-500">
                   {employee.department}
