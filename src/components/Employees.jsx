@@ -10,7 +10,7 @@ function Employees() {
     department,
     salary,
     date,
-    error,
+    editTimeError,
     edit,
     setEmployeeList,
     setEmployeeName,
@@ -19,7 +19,7 @@ function Employees() {
     setDepartment,
     setSalary,
     setDate,
-    setError,
+    setEditTimeError,
     setEdit,
     handleSubmit,
     findEdit,
@@ -137,7 +137,7 @@ function Employees() {
                 onChange={(e) => setDate(e.target.value)}
               />
 
-              {error && <p className="text-red-500 text-sm">{error}</p>}
+              {editTimeError && <p className="text-red-500 text-sm">{editTimeError}</p>}
 
               <div className="flex gap-3">
                 <button

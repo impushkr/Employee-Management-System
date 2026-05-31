@@ -40,6 +40,7 @@ export function EmployeesProvider({ children }) {
   const [date, setDate] = useState("");
   const [id, setId] = useState("");
   const [error, setError] = useState("");
+  const [editTimeError, setEditTimeError] = useState("");
   const [edit, setEdit] = useState(false);
 
   function handleSubmit(e) {
@@ -54,6 +55,8 @@ export function EmployeesProvider({ children }) {
       !date
     ) {
       return setError("All Fields are required");
+    } else if (employeeList.map((allEmp) => allEmp.email === email)) {
+      return setError("email already registered");
     }
 
     const newEmployee = {
@@ -88,7 +91,23 @@ export function EmployeesProvider({ children }) {
   function handleEdit(e) {
     e.preventDefault();
 
-    setEmployeeList(employeeList.map((pre) =>
+    if (
+      !employeeName ||
+      !email ||
+      !position ||
+      !department ||
+      !salary ||
+      !date
+    ) {
+      return setEditTimeError("All Fields are required");
+    } else if (
+      employeeList.some((emp) => emp.id !== id && emp.email === email)
+    ) {
+      return setEditTimeError("email already registered");
+    }
+
+    setEmployeeList(
+      employeeList.map((pre) =>
         pre.id === id
           ? {
               ...pre,
@@ -99,13 +118,14 @@ export function EmployeesProvider({ children }) {
               salary: salary,
               date: date,
             }
-          : pre,)
-          )
-    setEdit(!edit)
+          : pre,
+      ),
+    );
+    setEdit(!edit);
   }
 
-  function delEmployee(e){
-    setEmployeeList(employeeList.filter((allEmp)=>allEmp.id !== e.id))
+  function delEmployee(e) {
+    setEmployeeList(employeeList.filter((allEmp) => allEmp.id !== e.id));
   }
 
   return (
@@ -120,6 +140,7 @@ export function EmployeesProvider({ children }) {
           salary,
           date,
           error,
+          editTimeError,
           edit,
           setEmployeeList,
           setEmployeeName,
@@ -129,6 +150,7 @@ export function EmployeesProvider({ children }) {
           setSalary,
           setDate,
           setError,
+          setEditTimeError,
           setEdit,
           handleSubmit,
           findEdit,

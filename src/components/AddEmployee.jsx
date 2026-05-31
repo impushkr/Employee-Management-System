@@ -43,7 +43,7 @@ export default function AddEmployee() {
             <input
               type="email"
               placeholder="Email"
-              className="border p-2"
+              className={employeeList.some((emp)=>emp.email===email)||error==="email already registered"?'border border-red-600':'border p-2'}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
