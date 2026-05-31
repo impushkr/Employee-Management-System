@@ -24,7 +24,7 @@ export default function AddEmployee() {
 
   return (
     <>
-      <div className="flex justify-center">
+      <div className="flex justify-center pt-25">
         <div className="p-6 ">
           <h1 className="text-2xl font-bold mb-4">Add Employee</h1>
 
